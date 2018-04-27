@@ -89,4 +89,4 @@ queue.getPendingLength() === 1;
 
 ## Queue options
 
-- **interval** : delay between two elements in queue
+- **interval** : delay between two elements in queue (in millis)

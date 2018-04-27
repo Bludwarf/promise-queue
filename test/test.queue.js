@@ -208,7 +208,6 @@ describe('queue', function () {
             var gen1 = sinon.spy(now);
             var gen2 = sinon.spy(now);
 
-            queue.add(function () {});
             queue.add(gen1);
             queue.add(gen2)
                 .then(function () {
