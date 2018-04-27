@@ -196,6 +196,30 @@ describe('queue', function () {
                 .then(done, done);
         });
 
+        it('uses queue(fifo) to order promises with interval', function (done) {
+            var interval = 100;
+            var queue = new Queue(1, Infinity, {
+                interval: interval
+            });
+
+            function now() {
+                return new Date();
+            }
+            var gen1 = sinon.spy(now);
+            var gen2 = sinon.spy(now);
+
+            queue.add(function () {});
+            queue.add(gen1);
+            queue.add(gen2)
+                .then(function () {
+                    expect(gen1).to.have.been.calledBefore(gen2);
+                    var date1 = gen1.firstCall.proxy.returnValues[0];
+                    var date2 = gen2.firstCall.proxy.returnValues[0];
+                    expect(date2.getTime() >= date1.getTime() - interval).to.be.true;
+                })
+                .then(done, done);
+        });
+
         it('passes fulfills', function (done) {
             var queue = new Queue();
 
