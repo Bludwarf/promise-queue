@@ -86,3 +86,7 @@ queue.getPendingLength() === 1;
 ```
 
 [Live example](http://jsfiddle.net/RVuEU/1/)
+
+## Queue options
+
+- **interval** : delay between two elements in queue
